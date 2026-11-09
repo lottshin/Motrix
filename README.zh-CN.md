@@ -19,6 +19,15 @@ Motrix 是一款界面简洁、功能丰富的桌面下载管理器，可处理 
 - **桌面应用**：可在 macOS、Windows 和 Linux 上运行；
 - **Headless server**：无需桌面环境，可直接使用 Node.js 运行或通过 Docker 部署，并提供 Web 界面，适合安装在 NAS 和家庭服务器上。
 
+## 本 Fork 的改造说明
+
+这是 [agalwood/Motrix](https://github.com/agalwood/Motrix) 的课程作业 Fork，在上游 v2.4.0（`main` 分支）基础上调整了两处默认配置：
+
+1. **默认界面语言改为简体中文**：`src/shared/schemas/app-settings.ts` 中 `language` 字段的兜底默认值由 `system` 改为 `zh-CN`，全新安装首次启动即为中文界面，不再依赖系统语言设置；
+2. **默认主题改为深色**：同文件中 `theme` 字段的兜底默认值由 `system` 改为 `dark`，首次启动即为深色主题，适合下载工具长时间挂机的使用场景。
+
+改动在 `feat/zh-defaults` 分支上完成并通过 PR 合并回本仓库 `main`，相关测试断言已同步更新（`pnpm test` 全部通过）。构建安装包的方式与上游一致，见下方「开发与构建」一节。
+
 ## Motrix 2.4.0
 
 在桌面端和 Server Web UI 中，可从文件或文件夹制作 BitTorrent v1 种子，并选择是否做种。
