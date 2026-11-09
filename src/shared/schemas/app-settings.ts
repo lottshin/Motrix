@@ -37,11 +37,11 @@ export const appSettingsSchema = z.object({
   showMainWindowAtLogin: z.boolean().catch(false),
   mainWindowMinWidth: windowMinimumDimensionSchema.catch(914),
   mainWindowMinHeight: windowMinimumDimensionSchema.catch(672),
-  theme: z.enum(['system', 'light', 'dark']).catch('system'),
+  theme: z.enum(['system', 'light', 'dark']).catch('dark'),
   sidebarColor: sidebarColorSchema.catch('cyan'),
   reduceMotion: z.boolean().catch(false),
   hardwareAcceleration: z.boolean().catch(true),
-  language: languagePreferenceSchema.catch('system'),
+  language: languagePreferenceSchema.catch('zh-CN'),
   byteUnitSystem: byteUnitSystemSchema.catch(DEFAULT_BYTE_UNIT_PREFERENCE),
   speedLimitUnits: speedLimitUnitsSchema.catch(speedLimitUnitsSchema.parse({})),
   // Empty string is a sentinel: SettingsManager (main/server) seeds the
