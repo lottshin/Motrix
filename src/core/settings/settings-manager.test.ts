@@ -610,10 +610,10 @@ describe('SettingsManager', () => {
         defaultSaveDir: expect.stringMatching(/Downloads$/),
       })
       expect(settings.app.defaultSaveDir).not.toBe('')
-      expect(settings.app.language).toBe('system')
+      expect(settings.app.language).toBe('zh-CN')
       expect(
         JSON.parse(mockedFs.writeFile.mock.calls.at(-1)![1]).app.language
-      ).toBe('system')
+      ).toBe('zh-CN')
       expect(settings.app.liquidGlassEffect).toBe(false)
       expect(settings.onboarding).toEqual(DEFAULT_ONBOARDING_STATE)
       expect(settings.dashboard).toEqual(DEFAULT_DASHBOARD_LAYOUT)
@@ -1258,7 +1258,7 @@ describe('SettingsManager', () => {
       mockedFs.writeFile.mockRejectedValueOnce(new Error('disk full'))
 
       await expect(
-        manager.update({ app: { language: 'zh-CN', theme: 'dark' } })
+        manager.update({ app: { language: 'en-US', theme: 'light' } })
       ).rejects.toThrow('disk full')
 
       expect(manager.getApp().language).toBe(DEFAULT_APP_SETTINGS.language)
@@ -1266,16 +1266,16 @@ describe('SettingsManager', () => {
       expect(onChange).not.toHaveBeenCalled()
 
       mockedFs.writeFile.mockResolvedValue(undefined)
-      await manager.setDisclaimerLanguage('zh-CN')
+      await manager.setDisclaimerLanguage('en-US')
 
       const persisted = JSON.parse(
         mockedFs.writeFile.mock.calls.at(-1)?.[1] as string
       ) as AppSettings
-      expect(persisted.app.language).toBe('zh-CN')
+      expect(persisted.app.language).toBe('en-US')
       expect(persisted.app.theme).toBe(DEFAULT_APP_SETTINGS.theme)
       expect(manager.getApp()).toEqual(
         expect.objectContaining({
-          language: 'zh-CN',
+          language: 'en-US',
           theme: DEFAULT_APP_SETTINGS.theme,
         })
       )
